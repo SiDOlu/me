@@ -3,199 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idea-to-Execution Portfolio</title>
+    <title>Invention Hub | Portfolio</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #0a2a43;
-            --accent: #17a2b8;
-            --glass: rgba(255, 255, 255, 0.95);
-            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --primary: #0f172a;
+            --idea-gold: #fbbf24;
+            --accent-teal: #2dd4bf;
+            --blueprint-blue: #1e293b;
+            --glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
-            background: var(--bg-gradient);
-            color: var(--primary);
-            min-height: 100vh;
+            background-color: var(--primary);
+            background-image: 
+                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px; /* Blueprint grid effect */
+            color: #f1f5f9;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
-        nav {
-            background: var(--primary);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        /* Abstract Floating Shapes */
+        .shape {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite alternate;
+        }
+        .shape-1 { width: 400px; height: 400px; background: var(--idea-gold); top: -100px; right: -100px; }
+        .shape-2 { width: 300px; height: 300px; background: var(--accent-teal); bottom: -50px; left: -50px; }
+
+        @keyframes float {
+            from { transform: translate(0,0) rotate(0deg); }
+            to { transform: translate(50px, 100px) rotate(20deg); }
         }
 
-        .logo { font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
-
-        /* Filter Controls */
-        .controls {
-            padding: 2rem 5%;
+        /* Header & Inspiration Section */
+        header {
+            padding: 80px 5% 40px;
             text-align: center;
         }
 
-        .btn-filter {
-            padding: 10px 25px;
-            margin: 5px;
-            border: none;
-            border-radius: 25px;
+        .lightbulb-icon {
+            font-size: 3rem;
+            color: var(--idea-gold);
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+        }
+
+        h1 { font-size: 3rem; margin: 0; letter-spacing: -1px; }
+        p.tagline { color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 10px auto; }
+
+        /* Filter Tabs */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .filter-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
             cursor: pointer;
-            background: white;
             transition: 0.3s;
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        .btn-filter.active { background: var(--accent); color: white; }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--idea-gold);
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+        }
 
-        /* Project Grid */
-        .portfolio-grid {
+        /* The Grid */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            padding: 0 5% 5rem;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 0 5% 100px;
         }
 
+        /* Idea Card Design */
         .card {
             background: var(--glass);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transition: transform 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 30px;
             position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .card:hover { transform: translateY(-10px); }
-
-        .status-badge {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 12px;
-            text-transform: uppercase;
-            font-weight: bold;
-            float: right;
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--idea-gold);
+            background: rgba(255,255,255,0.06);
         }
 
-        .in-progress { background: #fff3cd; color: #856404; }
-        .completed { background: #d4edda; color: #155724; }
-
-        /* Progress Bar */
-        .progress-container {
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            margin: 15px 0;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 4px;
-            transition: width 1s ease-in-out;
-        }
-
-        .card h3 { margin-top: 0; color: var(--primary); }
-        .card p { font-size: 0.9rem; line-height: 1.6; color: #555; }
-
-        .btn-action {
+        .status-pill {
             display: inline-block;
-            margin-top: 15px;
-            padding: 8px 15px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.85rem;
+            background: rgba(45, 212, 191, 0.1);
+            color: var(--accent-teal);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border: 1px solid rgba(45, 212, 191, 0.3);
         }
 
-        @media (max-width: 600px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
+        .card h3 { font-size: 1.5rem; margin: 10px 0; color: #fff; }
+        .card p { color: #94a3b8; line-height: 1.6; font-size: 0.95rem; }
+
+        /* Progress Steps */
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .step {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #475569;
+        }
+
+        .step.active { color: var(--idea-gold); font-weight: bold; }
+
+        .ignite-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: transparent;
+            border: 1px solid var(--idea-gold);
+            color: var(--idea-gold);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .ignite-btn:hover {
+            background: var(--idea-gold);
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <div class="logo">PORTFOLIO.RUN</div>
-    <div class="nav-links">
-        <i class="fas fa-bars"></i>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+
+    <header>
+        <div class="lightbulb-icon"><i class="fas fa-lightbulb"></i></div>
+        <h1>Idea Factory</h1>
+        <p class="tagline">Igniting ventures, fueling curiosity, and building the infrastructure for tomorrow's breakthroughs.</p>
+    </header>
+
+    <div class="filter-container">
+        <button class="filter-btn active">All Projects</button>
+        <button class="filter-btn">Venture Ideas</button>
+        <button class="filter-btn">Research Labs</button>
     </div>
-</nav>
 
-<div class="controls">
-    <h1>Venture Timeline</h1>
-    <button class="btn-filter active" onclick="filterSelection('all')">Show All</button>
-    <button class="btn-filter" onclick="filterSelection('idea')">Personal Ideas</button>
-    <button class="btn-filter" onclick="filterSelection('work')">Professional Work</button>
-</div>
-
-<div class="portfolio-grid" id="grid">
-    <div class="card filter-item idea">
-        <span class="status-badge in-progress">Day 2: Ideation</span>
-        <h3>Toe-Gap Applicator</h3>
-        <p>A beauty-tech solution simplifying technical application processes for consumers.</p>
-        <div class="progress-container">
-            <div class="progress-bar" style="width: 15%"></div>
+    <div class="grid">
+        <div class="card">
+            <div class="status-pill">Prototype Ready</div>
+            <h3>Toe Gap Applicator</h3>
+            <p>A precision beauty-tech instrument designed to solve ergonomics in specialized applications. Bridging the gap between conceptual design and physical utility.</p>
+            <div class="steps">
+                <div class="step active">Sketch</div>
+                <div class="step active">3D Model</div>
+                <div class="step active">Prototype</div>
+                <div class="step">Market</div>
+            </div>
+            <button class="ignite-btn">View Schematics</button>
         </div>
-        <span>Build Progress: 15%</span>
-        <br>
-        <a href="#" class="btn-action">View Canvas</a>
-    </div>
 
-    <div class="card filter-item work">
-        <span class="status-badge completed">Live</span>
-        <h3>NHS Burnout Predictor</h3>
-        <p>AI predictive modeling tool for healthcare staffing optimization. Integrated with existing EHR systems.</p>
-        <div class="progress-container">
-            <div class="progress-bar" style="width: 100%"></div>
+        <div class="card">
+            <div class="status-pill">Research Ready</div>
+            <h3>LifeMetric</h3>
+            <p>Revolutionizing elderly care using mmWave radar and Edge AI. Real-time fall detection without cameras or wearables, prioritizing dignity and safety.</p>
+            <div class="steps">
+                <div class="step active">Ethos</div>
+                <div class="step active">Radar AI</div>
+                <div class="step">Beta</div>
+                <div class="step">Launch</div>
+            </div>
+            <button class="ignite-btn">Explore Tech Stack</button>
         </div>
-        <span>Build Progress: 100%</span>
-        <br>
-        <a href="#" class="btn-action">Case Study</a>
-    </div>
 
-    <div class="card filter-item idea">
-        <span class="status-badge in-progress">Day 4: Prototype</span>
-        <h3>SME Invoice Finance</h3>
-        <p>Streamlining micro-loans for small businesses via automated ledger verification.</p>
-        <div class="progress-container">
-            <div class="progress-bar" style="width: 45%"></div>
+        <div class="card">
+            <div class="status-pill" style="color: var(--idea-gold); border-color: var(--idea-gold);">Sample App In-Progress</div>
+            <h3>JoinFoundry</h3>
+            <p>From Idea to Boardroom in 7 days. A comprehensive framework for rapid venture building and rapid prototyping of business concepts.</p>
+            <div class="steps">
+                <div class="step active">Logic</div>
+                <div class="step active">UI/UX</div>
+                <div class="step">Full Code</div>
+                <div class="step">Scale</div>
+            </div>
+            <button class="ignite-btn">Join the Foundry</button>
         </div>
-        <span>Build Progress: 45%</span>
-        <br>
-        <a href="#" class="btn-action">Explore Demo</a>
+
+        <div class="card">
+            <div class="status-pill">Research Ongoing</div>
+            <h3>Fintech Capital Framework</h3>
+            <p>A prescriptive framework of investment-ready strategies for Nigerian Fintech entrepreneurs seeking future capital and sustainable growth.</p>
+            <div class="steps">
+                <div class="step active">Data</div>
+                <div class="step active">Analysis</div>
+                <div class="step">Publication</div>
+                <div class="step">Impact</div>
+            </div>
+            <button class="ignite-btn">Read Framework</button>
+        </div>
     </div>
-</div>
 
-<script>
-    function filterSelection(c) {
-        var x, i;
-        x = document.getElementsByClassName("filter-item");
-        if (c == "all") c = "";
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-            if (x[i].className.indexOf(c) > -1) {
-                x[i].style.display = "block";
-            }
-        }
-        
-        // Update active button state
-        var btns = document.getElementsByClassName("btn-filter");
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].classList.remove("active");
-        }
-        event.currentTarget.classList.add("active");
-    }
-</script>
-
+    <script>
+        // Simple interactivity for the buttons
+        document.querySelectorAll('.ignite-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const title = btn.parentElement.querySelector('h3').innerText;
+                alert(`Igniting the spark for: ${title}. Redirecting to project details...`);
+            });
+        });
+    </script>
 </body>
 </html>
