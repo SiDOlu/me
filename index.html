@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idea-to-Execution Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a2a43;
+            --accent: #17a2b8;
+            --glass: rgba(255, 255, 255, 0.95);
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: var(--bg-gradient);
+            color: var(--primary);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { font-weight: bold; font-size: 1.5rem; letter-spacing: 1px; }
+
+        /* Filter Controls */
+        .controls {
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        .btn-filter {
+            padding: 10px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: white;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-filter.active { background: var(--accent); color: white; }
+
+        /* Project Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 0 5% 5rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover { transform: translateY(-10px); }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            font-weight: bold;
+            float: right;
+        }
+
+        .in-progress { background: #fff3cd; color: #856404; }
+        .completed { background: #d4edda; color: #155724; }
+
+        /* Progress Bar */
+        .progress-container {
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        .card h3 { margin-top: 0; color: var(--primary); }
+        .card p { font-size: 0.9rem; line-height: 1.6; color: #555; }
+
+        .btn-action {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">PORTFOLIO.RUN</div>
+    <div class="nav-links">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<div class="controls">
+    <h1>Venture Timeline</h1>
+    <button class="btn-filter active" onclick="filterSelection('all')">Show All</button>
+    <button class="btn-filter" onclick="filterSelection('idea')">Personal Ideas</button>
+    <button class="btn-filter" onclick="filterSelection('work')">Professional Work</button>
+</div>
+
+<div class="portfolio-grid" id="grid">
+    <div class="card filter-item idea">
+        <span class="status-badge in-progress">Day 2: Ideation</span>
+        <h3>Toe-Gap Applicator</h3>
+        <p>A beauty-tech solution simplifying technical application processes for consumers.</p>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: 15%"></div>
+        </div>
+        <span>Build Progress: 15%</span>
+        <br>
+        <a href="#" class="btn-action">View Canvas</a>
+    </div>
+
+    <div class="card filter-item work">
+        <span class="status-badge completed">Live</span>
+        <h3>NHS Burnout Predictor</h3>
+        <p>AI predictive modeling tool for healthcare staffing optimization. Integrated with existing EHR systems.</p>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: 100%"></div>
+        </div>
+        <span>Build Progress: 100%</span>
+        <br>
+        <a href="#" class="btn-action">Case Study</a>
+    </div>
+
+    <div class="card filter-item idea">
+        <span class="status-badge in-progress">Day 4: Prototype</span>
+        <h3>SME Invoice Finance</h3>
+        <p>Streamlining micro-loans for small businesses via automated ledger verification.</p>
+        <div class="progress-container">
+            <div class="progress-bar" style="width: 45%"></div>
+        </div>
+        <span>Build Progress: 45%</span>
+        <br>
+        <a href="#" class="btn-action">Explore Demo</a>
+    </div>
+</div>
+
+<script>
+    function filterSelection(c) {
+        var x, i;
+        x = document.getElementsByClassName("filter-item");
+        if (c == "all") c = "";
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+            if (x[i].className.indexOf(c) > -1) {
+                x[i].style.display = "block";
+            }
+        }
+        
+        // Update active button state
+        var btns = document.getElementsByClassName("btn-filter");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].classList.remove("active");
+        }
+        event.currentTarget.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
