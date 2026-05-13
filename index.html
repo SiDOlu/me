@@ -5,112 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiD Oluwagbeyi | Idea Factory</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <div id="nda-overlay" class="nda-overlay">
-    <div class="nda-modal">
-        <div class="lightbulb-icon" style="font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i></div>
-        <h2>Confidentiality Notice</h2>
-        <p>By entering this "Idea Factory," you acknowledge that the concepts, schematics, and research presented (including <strong>LifeMetric</strong> and <strong>Fintech Capital Framework</strong>) are proprietary and confidential.</p>
-        <p>You agree not to disclose, replicate, or distribute these ideas without explicit permission from <strong>SiD Oluwagbeyi</strong>.</p>
-        <div class="nda-actions">
-            <button class="btn-agree" onclick="acceptNDA()">I Agree & Enter</button>
-            <button class="btn-cancel" onclick="window.location.href='https://google.com'">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<style>
-    /* NDA Modal Styles */
-    .nda-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(15, 23, 42, 0.9);
-        backdrop-filter: blur(20px);
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.5s ease;
-    }
-
-    .nda-modal {
-        background: var(--blueprint-blue);
-        border: 1px solid var(--idea-gold);
-        padding: 40px;
-        border-radius: 28px;
-        max-width: 500px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 0 50px rgba(0,0,0,0.5);
-    }
-
-    .nda-modal h2 {
-        color: var(--idea-gold);
-        margin-top: 0;
-        letter-spacing: -1px;
-    }
-
-    .nda-modal p {
-        color: var(--text-dim);
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-
-    .nda-actions {
-        margin-top: 30px;
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-    }
-
-    .btn-agree {
-        background: var(--idea-gold);
-        color: var(--primary);
-        border: none;
-        padding: 12px 25px;
-        border-radius: 12px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .btn-cancel {
-        background: transparent;
-        color: #ef4444;
-        border: 1px solid #ef4444;
-        padding: 12px 25px;
-        border-radius: 12px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .btn-agree:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
-    .btn-cancel:hover { background: rgba(239, 68, 68, 0.1); }
-
-    /* Hide class for JS */
-    .hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-</style>
-
-<script>
-    function acceptNDA() {
-        document.getElementById('nda-overlay').classList.add('hidden');
-        // Optional: Save to local storage so it doesn't pop up every time they refresh
-        localStorage.setItem('nda_accepted', 'true');
-    }
-
-    // Check if they've already accepted
-    window.onload = function() {
-        if (localStorage.getItem('nda_accepted') === 'true') {
-            document.getElementById('nda-overlay').style.display = 'none';
-        }
-    }
-</script>
     <style>
         :root {
             --primary: #0f172a;
@@ -123,282 +17,148 @@
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
             background-color: var(--primary);
             background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
             background-size: 40px 40px;
             color: var(--text-main);
             overflow-x: hidden;
-            line-height: 1.5;
         }
 
         /* Abstract Background Elements */
-        .shape {
-            position: fixed;
-            z-index: -1;
-            filter: blur(80px);
-            opacity: 0.3;
-            animation: float 20s infinite alternate;
-        }
+        .shape { position: fixed; z-index: -1; filter: blur(80px); opacity: 0.3; animation: float 20s infinite alternate; }
         .shape-1 { width: 450px; height: 450px; background: var(--idea-gold); top: -150px; right: -100px; }
         .shape-2 { width: 350px; height: 350px; background: var(--accent-teal); bottom: -100px; left: -50px; }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(60px, 120px); } }
 
-        @keyframes float {
-            from { transform: translate(0,0) rotate(0deg); }
-            to { transform: translate(60px, 120px) rotate(15deg); }
-        }
-
-        /* Hero Section */
-        header {
-            padding: 100px 5% 60px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .profile-container {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 25px;
-        }
-
-        .profile-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            border: 4px solid var(--idea-gold);
-            object-fit: cover;
-            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
-        }
-
-        .spark-icon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: var(--idea-gold);
-            color: var(--primary);
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            animation: pulse 2s infinite;
-        }
-
-        h1 { font-size: 3.5rem; margin: 10px 0; font-weight: 800; letter-spacing: -2px; }
-        .tagline { color: var(--text-dim); font-size: 1.25rem; margin-bottom: 30px; }
-
-        /* Contact Bar */
-        .contact-bar {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .contact-link {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            transition: 0.3s;
-        }
-
-        .contact-link:hover {
-            border-color: var(--idea-gold);
-            background: rgba(251, 191, 36, 0.1);
-        }
+        /* Header & Hero */
+        header { padding: 100px 5% 60px; text-align: center; max-width: 900px; margin: 0 auto; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; border: 4px solid var(--idea-gold); object-fit: cover; }
+        h1 { font-size: 3.5rem; margin: 10px 0; letter-spacing: -2px; }
+        .contact-bar { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-top: 25px; }
+        .contact-link { color: var(--text-main); text-decoration: none; font-size: 0.85rem; padding: 8px 16px; background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; }
 
         /* Portfolio Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 30px;
-            padding: 0 8% 100px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; padding: 0 8% 100px; }
+        .card { background: var(--glass); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; padding: 35px; backdrop-filter: blur(12px); transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--idea-gold); }
+        .status-pill { display: inline-block; background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); padding: 5px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; }
 
-        .card {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 28px;
-            padding: 35px;
-            backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover {
-            transform: translateY(-12px);
-            border-color: var(--idea-gold);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .status-pill {
-            align-self: flex-start;
-            background: rgba(45, 212, 191, 0.1);
-            color: var(--accent-teal);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid rgba(45, 212, 191, 0.2);
-            margin-bottom: 20px;
-        }
-
-        .card h3 { font-size: 1.6rem; margin-bottom: 12px; color: #fff; }
-        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
-
-        /* Steps Visualization */
-        .roadmap {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .step {
-            font-size: 0.65rem;
-            color: #475569;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .step.active { color: var(--idea-gold); }
-
-        .btn-boost {
-            margin-top: 25px;
-            padding: 14px;
-            border-radius: 14px;
-            border: 1px solid var(--idea-gold);
-            background: transparent;
-            color: var(--idea-gold);
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-boost:hover {
-            background: var(--idea-gold);
-            color: var(--primary);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .grid { grid-template-columns: 1fr; padding: 0 5% 50px; }
-        }
+        /* NDA Overlay */
+        .nda-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); z-index: 9999; display: flex; align-items: center; justify-content: center; }
+        .nda-modal { background: var(--blueprint-blue); border: 1px solid var(--idea-gold); padding: 40px; border-radius: 28px; max-width: 500px; width: 90%; text-align: center; }
+        .audit-notice { background: rgba(45, 212, 191, 0.05); border: 1px dashed var(--accent-teal); padding: 15px; border-radius: 12px; font-size: 0.85rem; color: var(--accent-teal); margin: 20px 0; display: flex; gap: 10px; align-items: center; }
+        .btn-agree { background: var(--idea-gold); color: var(--primary); border: none; padding: 12px 25px; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 10px; }
+        .btn-cancel { background: transparent; color: #ef4444; border: 1px solid #ef4444; padding: 12px 25px; border-radius: 12px; cursor: pointer; width: 100%; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
+<div class="shape shape-1"></div>
+<div class="shape shape-2"></div>
 
-    <header>
-        <div class="profile-container">
-            <img src="https://media.licdn.com/dms/image/v2/C5603AQHC-RrPNE0LSA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1613405413687?e=1780531200&v=beta&t=J3VS9oo_H7xOxjOSlBp-xfY8A7enIJtncX_vhITkqzY" alt="SiD Oluwagbeyi" class="profile-img">
-            <div class="spark-icon"><i class="fas fa-bolt"></i></div>
-        </div>
-        <h1>SiD Oluwagbeyi</h1>
-        <p class="tagline">Technology Executive & Software Architect. Building frameworks that turn creative sparks into scalable ventures.</p>
+<div id="nda-overlay" class="nda-overlay">
+    <div class="nda-modal">
+        <div style="color: var(--idea-gold); font-size: 2.5rem; margin-bottom: 15px;"><i class="fas fa-fingerprint"></i></div>
+        <h2>Confidentiality & Audit</h2>
+        <p style="color: var(--text-dim);">By entering, you acknowledge that all concepts (LifeMetric, JoinFoundry, etc.) are proprietary. Unauthorized distribution is prohibited.</p>
         
-        <div class="contact-bar">
-            <a href="https://www.linkedin.com/in/oluwagbeyid/" class="contact-link" target="_blank">
-                <i class="fab fa-linkedin"></i> linkedin.com/in/oluwagbeyid
-            </a>
-            <a href="mailto:sanyaoluwagbeyi@gmail.com" class="contact-link">
-                <i class="fas fa-envelope"></i> sanyaoluwagbeyi@gmail.com
-            </a>
-            <a href="mailto:sanya@joinfoundry.run" class="contact-link">
-                <i class="fas fa-rocket"></i> sanya@joinfoundry.run
-            </a>
-        </div>
-    </header>
-
-    <div class="grid">
-        <div class="card">
-            <div class="status-pill">Prototype Ready</div>
-            <h3>Toe Gap Applicator</h3>
-            <p>A precision beauty-tech solution focused on ergonomics and specialized utility. Moving from conceptual 3D modeling to physical functional testing.</p>
-            <div class="roadmap">
-                <span class="step active">Sketch</span>
-                <span class="step active">Design</span>
-                <span class="step active">Prototype</span>
-                <span class="step">Market</span>
-            </div>
-            <button class="btn-boost">Boost Concept</button>
+        <div class="audit-notice">
+            <i class="fas fa-info-circle"></i>
+            <span>Your <strong>IP Address</strong> and <strong>Timestamp</strong> will be logged upon entry for security enforcement.</span>
         </div>
 
-        <div class="card">
-            <div class="status-pill">Research Ready</div>
-            <h3>LifeMetric</h3>
-            <p>Privacy-first elderly care using mmWave radar and Edge AI. Real-time health monitoring without cameras or wearables, preserving dignity for a global aging population.</p>
-            <div class="roadmap">
-                <span class="step active">Vision</span>
-                <span class="step active">R&D</span>
-                <span class="step">Alpha</span>
-                <span class="step">Pilot</span>
-            </div>
-            <button class="btn-boost">Boost Concept</button>
-        </div>
-
-        <div class="card">
-            <div class="status-pill" style="border-color: var(--idea-gold); color: var(--idea-gold);">Sample App In-Progress</div>
-            <h3>JoinFoundry</h3>
-            <p>Idea → Boardroom in 7 Days. A systematic approach to rapid venture building, providing the tools for founders to manifest concepts instantly.</p>
-            <div class="roadmap">
-                <span class="step active">Core</span>
-                <span class="step active">Sample</span>
-                <span class="step">Full Build</span>
-                <span class="step">Launch</span>
-            </div>
-            <button class="btn-boost">Boost Concept</button>
-        </div>
-
-        <div class="card">
-            <div class="status-pill">Research Ongoing</div>
-            <h3>Fintech Capital Framework</h3>
-            <p>Strategic, investment-ready recommendations for Fintech entrepreneurs in Nigeria. Identifying future capital trends and sustainable scaling strategies.</p>
-            <div class="roadmap">
-                <span class="step active">Survey</span>
-                <span class="step active">Analytic</span>
-                <span class="step">Paper</span>
-                <span class="step">Advise</span>
-            </div>
-            <button class="btn-boost">Boost Concept</button>
-        </div>
+        <button class="btn-agree" id="agree-btn" onclick="acceptAndLog()">I Agree & Enter</button>
+        <button class="btn-cancel" onclick="window.location.href='https://google.com'">Cancel</button>
+        
+        <p style="font-size: 0.75rem; margin-top: 20px;">
+            <a href="javascript:void(0)" onclick="showPrivacy()" style="color: var(--idea-gold);">View Privacy Policy</a>
+        </p>
     </div>
+</div>
 
-    <script>
-        document.querySelectorAll('.btn-boost').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const project = e.target.parentElement.querySelector('h3').innerText;
-                console.log(`Sparking boost for ${project}`);
-                e.target.innerText = "Ignited!";
-                setTimeout(() => e.target.innerText = "Boost Concept", 2000);
+<div id="privacy-popup" class="nda-overlay hidden" style="z-index: 10000;">
+    <div class="nda-modal" style="text-align: left;">
+        <h3>Privacy Policy</h3>
+        <p><strong>Data:</strong> IP Address, Timestamp.</p>
+        <p><strong>Reason:</strong> Audit trail for NDA enforcement.</p>
+        <p><strong>DPO:</strong> SiD Oluwagbeyi.</p>
+        <button class="btn-agree" onclick="hidePrivacy()">Close</button>
+    </div>
+</div>
+
+<header>
+    <img src="https://media.licdn.com/dms/image/v2/C5603AQHC-RrPNE0LSA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1613405413687?e=1780531200&v=beta&t=J3VS9oo_H7xOxjOSlBp-xfY8A7enIJtncX_vhITkqzY" alt="SiD" class="profile-img">
+    <h1>SiD Oluwagbeyi</h1>
+    <p class="tagline">Tech Executive | Idea Factory Architect</p>
+    <div class="contact-bar">
+        <a href="https://www.linkedin.com/in/oluwagbeyid/" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="mailto:sanya@joinfoundry.run" class="contact-link"><i class="fas fa-rocket"></i> sanya@joinfoundry.run</a>
+    </div>
+</header>
+
+<div class="grid">
+    <div class="card">
+        <div class="status-pill">Prototype Ready</div>
+        <h3>Toe Gap Applicator</h3>
+        <p>Ergonomic beauty-tech instrument designed for specialized precision utility.</p>
+    </div>
+    <div class="card">
+        <div class="status-pill">Research Ready</div>
+        <h3>LifeMetric</h3>
+        <p>mmWave radar elderly care monitoring. Privacy-first, no-wearable health safety.</p>
+    </div>
+    <div class="card">
+        <div class="status-pill" style="color: var(--idea-gold);">Sample In-Progress</div>
+        <h3>JoinFoundry</h3>
+        <p>The 7-day framework for moving from raw concept to boardroom-ready venture.</p>
+    </div>
+    <div class="card">
+        <div class="status-pill">Research Ongoing</div>
+        <h3>Fintech Capital Framework</h3>
+        <p>Investment-ready strategies for Nigerian Fintech entrepreneurs seeking future growth.</p>
+    </div>
+</div>
+
+<script>
+    async function acceptAndLog() {
+        const btn = document.getElementById('agree-btn');
+        btn.innerText = "Authenticating...";
+        btn.disabled = true;
+
+        try {
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            
+            await fetch('https://formspree.io/f/xqenjgvq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "Event": "Portfolio Access Granted",
+                    "Visitor IP": ipData.ip,
+                    "Timestamp": new Date().toLocaleString(),
+                    "Notice": "User accepted NDA and Audit terms."
+                })
             });
-        });
-    </script>
+
+            localStorage.setItem('nda_accepted', 'true');
+            document.getElementById('nda-overlay').classList.add('hidden');
+        } catch (e) {
+            document.getElementById('nda-overlay').classList.add('hidden');
+        }
+    }
+
+    function showPrivacy() { document.getElementById('privacy-popup').classList.remove('hidden'); }
+    function hidePrivacy() { document.getElementById('privacy-popup').classList.add('hidden'); }
+
+    window.onload = function() {
+        if (localStorage.getItem('nda_accepted') === 'true') {
+            document.getElementById('nda-overlay').style.display = 'none';
+        }
+    }
+</script>
+
 </body>
 </html>
