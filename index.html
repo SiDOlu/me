@@ -61,16 +61,24 @@
 
 <div id="nda-overlay" class="nda-overlay">
     <div class="nda-modal">
-        <div style="color: var(--idea-gold); font-size: 2.5rem; margin-bottom: 15px;"><i class="fas fa-fingerprint"></i></div>
-        <h2>Confidentiality & Audit</h2>
-        <p style="color: var(--text-dim);">By entering, you acknowledge that all concepts (LifeMetric, JoinFoundry, etc.) are proprietary. Unauthorized distribution is prohibited.</p>
+        <div style="color: var(--idea-gold); font-size: 2.5rem; margin-bottom: 15px;"><i class="fas fa-user-shield"></i></div>
+        <h2>Identity & Confidentiality</h2>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Please identify yourself to access the proprietary research and ventures of the Idea Factory.</p>
         
-        <div class="audit-notice">
-            <i class="fas fa-info-circle"></i>
-            <span>Your <strong>IP Address</strong> and <strong>Timestamp</strong> will be logged upon entry for security enforcement.</span>
+        <div style="margin-bottom: 15px; text-align: left;">
+            <input type="text" id="visitor-name" placeholder="Full Name" required 
+                style="width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; box-sizing: border-box;">
+            
+            <input type="email" id="visitor-email" placeholder="Professional Email" required 
+                style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; box-sizing: border-box;">
         </div>
 
-        <button class="btn-agree" id="agree-btn" onclick="acceptAndLog()">I Agree & Enter</button>
+        <div class="audit-notice">
+            <i class="fas fa-info-circle"></i>
+            <span>Your <strong>Identity</strong>, <strong>IP</strong>, and <strong>Timestamp</strong> will be logged to <em>metrics@joinfoundry.run</em>.</span>
+        </div>
+
+        <button class="btn-agree" id="agree-btn" onclick="validateAndLog()">I Agree & Enter</button>
         <button class="btn-cancel" onclick="window.location.href='https://google.com'">Cancel</button>
         
         <p style="font-size: 0.75rem; margin-top: 20px;">
@@ -79,13 +87,32 @@
     </div>
 </div>
 
-<div id="privacy-popup" class="nda-overlay hidden" style="z-index: 10000;">
-    <div class="nda-modal" style="text-align: left;">
-        <h3>Privacy Policy</h3>
-        <p><strong>Data:</strong> IP Address, Timestamp.</p>
-        <p><strong>Reason:</strong> Audit trail for NDA enforcement.</p>
-        <p><strong>DPO:</strong> SiD Oluwagbeyi.</p>
-        <button class="btn-agree" onclick="hidePrivacy()">Close</button>
+<div id="privacy-popup" class="nda-overlay hidden" style="z-index: 10000; background: rgba(15, 23, 42, 0.98);">
+    <div class="nda-modal" style="text-align: left; max-width: 650px; border-color: var(--accent-teal); overflow-y: auto; max-height: 90vh;">
+        <h3 style="color: var(--accent-teal); border-bottom: 1px solid rgba(45, 212, 191, 0.2); padding-bottom: 10px;">
+            <i class="fas fa-user-shield"></i> Privacy & Data Disclosure
+        </h3>
+        
+        <div style="font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+            <p><strong>1. Data Collection & Identity</strong><br>
+            Upon entry, we collect your <strong>Full Name, Professional Email, IP Address,</strong> and <strong>Access Timestamp</strong>. This data is transmitted securely to <em>metrics@joinfoundry.run</em>.</p>
+
+            <p><strong>2. Purpose of Processing</strong><br>
+            This data is used exclusively to maintain a <strong>Confidentiality Audit Trail</strong>. It ensures that the proprietary research and "In-Progress" ventures (e.g., LifeMetric, Fintech Frameworks) are protected under a verifiable Non-Disclosure agreement.</p>
+
+            <p><strong>3. Legal Basis (GDPR/NDPR)</strong><br>
+            Processing is carried out under <strong>Legitimate Interest</strong> to protect Intellectual Property and Trade Secrets, and <strong>Contractual Necessity</strong> established by your agreement to the site's access terms.</p>
+
+            <p><strong>4. Data Retention & Sharing</strong><br>
+            Logs are retained for the duration of the project's development cycle. We do not sell your data or share it with third parties, except where required by law to enforce intellectual property rights.</p>
+
+            <p><strong>5. Your Rights</strong><br>
+            You may contact the Data Protection Officer at <em>sanya@joinfoundry.run</em> to request a copy of your logged data or its deletion, provided such a request does not compromise the security of the audit trail.</p>
+        </div>
+
+        <button class="btn-agree" style="width: auto; margin-top: 20px; background: var(--accent-teal); color: var(--primary);" onclick="hidePrivacy()">
+            Understood
+        </button>
     </div>
 </div>
 
@@ -95,7 +122,7 @@
     <p class="tagline">Tech Executive | Idea Factory Architect</p>
     <div class="contact-bar">
         <a href="https://www.linkedin.com/in/oluwagbeyid/" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        <a href="mailto:sanya@joinfoundry.run" class="contact-link"><i class="fas fa-rocket"></i> sanya@joinfoundry.run</a>
+        <a href="mailto:metrics@joinfoundry.run" class="contact-link"><i class="fas fa-rocket"></i> metrics@joinfoundry.run</a>
     </div>
 </header>
 
@@ -123,41 +150,49 @@
 </div>
 
 <script>
-    async function acceptAndLog() {
-        const btn = document.getElementById('agree-btn');
-        btn.innerText = "Authenticating...";
-        btn.disabled = true;
+    async function validateAndLog() {
+    const name = document.getElementById('visitor-name').value;
+    const email = document.getElementById('visitor-email').value;
+    const btn = document.getElementById('agree-btn');
 
-        try {
-            const ipResponse = await fetch('https://api.ipify.org?format=json');
-            const ipData = await ipResponse.json();
-            
-            await fetch('https://formspree.io/f/xqenjgvq', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    "Event": "Portfolio Access Granted",
-                    "Visitor IP": ipData.ip,
-                    "Timestamp": new Date().toLocaleString(),
-                    "Notice": "User accepted NDA and Audit terms."
-                })
-            });
-
-            localStorage.setItem('nda_accepted', 'true');
-            document.getElementById('nda-overlay').classList.add('hidden');
-        } catch (e) {
-            document.getElementById('nda-overlay').classList.add('hidden');
-        }
+    // Basic Validation
+    if (!name || !email || !email.includes('@')) {
+        alert("Please provide a valid name and email to proceed.");
+        return;
     }
 
-    function showPrivacy() { document.getElementById('privacy-popup').classList.remove('hidden'); }
-    function hidePrivacy() { document.getElementById('privacy-popup').classList.add('hidden'); }
+    btn.innerText = "Verifying Identity...";
+    btn.disabled = true;
 
-    window.onload = function() {
-        if (localStorage.getItem('nda_accepted') === 'true') {
-            document.getElementById('nda-overlay').style.display = 'none';
-        }
+    try {
+        // 1. Fetch IP
+        const ipResponse = await fetch('https://api.ipify.org?format=json');
+        const ipData = await ipResponse.json();
+        
+        // 2. Send to Formspree
+        await fetch('https://formspree.io/f/xqenjgvq', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "Subject": "New Authorized NDA Access",
+                "Visitor Name": name,
+                "Visitor Email": email,
+                "Visitor IP": ipData.ip,
+                "Timestamp": new Date().toLocaleString(),
+                "Agreement": "Full Legal Acceptance of Proprietary Terms"
+            })
+        });
+
+        // 3. Grant Access
+        localStorage.setItem('nda_accepted', 'true');
+        localStorage.setItem('visitor_name', name); // Optional: store name to personalize the header later
+        document.getElementById('nda-overlay').classList.add('hidden');
+    } catch (e) {
+        console.error("Logging sync failed");
+        // Fallback: allow entry if the logging service is down to avoid blocking legitimate users
+        document.getElementById('nda-overlay').classList.add('hidden');
     }
+}
 </script>
 
 </body>
