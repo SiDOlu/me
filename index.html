@@ -5,6 +5,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiD Oluwagbeyi | Idea Factory</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <div id="nda-overlay" class="nda-overlay">
+    <div class="nda-modal">
+        <div class="lightbulb-icon" style="font-size: 2rem; margin-bottom: 10px;"><i class="fas fa-shield-alt"></i></div>
+        <h2>Confidentiality Notice</h2>
+        <p>By entering this "Idea Factory," you acknowledge that the concepts, schematics, and research presented (including <strong>LifeMetric</strong> and <strong>Fintech Capital Framework</strong>) are proprietary and confidential.</p>
+        <p>You agree not to disclose, replicate, or distribute these ideas without explicit permission from <strong>SiD Oluwagbeyi</strong>.</p>
+        <div class="nda-actions">
+            <button class="btn-agree" onclick="acceptNDA()">I Agree & Enter</button>
+            <button class="btn-cancel" onclick="window.location.href='https://google.com'">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* NDA Modal Styles */
+    .nda-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(20px);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.5s ease;
+    }
+
+    .nda-modal {
+        background: var(--blueprint-blue);
+        border: 1px solid var(--idea-gold);
+        padding: 40px;
+        border-radius: 28px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    }
+
+    .nda-modal h2 {
+        color: var(--idea-gold);
+        margin-top: 0;
+        letter-spacing: -1px;
+    }
+
+    .nda-modal p {
+        color: var(--text-dim);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .nda-actions {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .btn-agree {
+        background: var(--idea-gold);
+        color: var(--primary);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-cancel {
+        background: transparent;
+        color: #ef4444;
+        border: 1px solid #ef4444;
+        padding: 12px 25px;
+        border-radius: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn-agree:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+    .btn-cancel:hover { background: rgba(239, 68, 68, 0.1); }
+
+    /* Hide class for JS */
+    .hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function acceptNDA() {
+        document.getElementById('nda-overlay').classList.add('hidden');
+        // Optional: Save to local storage so it doesn't pop up every time they refresh
+        localStorage.setItem('nda_accepted', 'true');
+    }
+
+    // Check if they've already accepted
+    window.onload = function() {
+        if (localStorage.getItem('nda_accepted') === 'true') {
+            document.getElementById('nda-overlay').style.display = 'none';
+        }
+    }
+</script>
     <style>
         :root {
             --primary: #0f172a;
