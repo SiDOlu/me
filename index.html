@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invention Hub | Portfolio</title>
+    <title>SiD Oluwagbeyi | Idea Factory</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -12,161 +12,195 @@
             --accent-teal: #2dd4bf;
             --blueprint-blue: #1e293b;
             --glass: rgba(255, 255, 255, 0.03);
+            --text-main: #f1f5f9;
+            --text-dim: #94a3b8;
         }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
             background-color: var(--primary);
-            background-image: 
-                radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
-            background-size: 40px 40px; /* Blueprint grid effect */
-            color: #f1f5f9;
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+            color: var(--text-main);
             overflow-x: hidden;
+            line-height: 1.5;
         }
 
-        /* Abstract Floating Shapes */
+        /* Abstract Background Elements */
         .shape {
             position: fixed;
             z-index: -1;
             filter: blur(80px);
-            opacity: 0.4;
+            opacity: 0.3;
             animation: float 20s infinite alternate;
         }
-        .shape-1 { width: 400px; height: 400px; background: var(--idea-gold); top: -100px; right: -100px; }
-        .shape-2 { width: 300px; height: 300px; background: var(--accent-teal); bottom: -50px; left: -50px; }
+        .shape-1 { width: 450px; height: 450px; background: var(--idea-gold); top: -150px; right: -100px; }
+        .shape-2 { width: 350px; height: 350px; background: var(--accent-teal); bottom: -100px; left: -50px; }
 
         @keyframes float {
             from { transform: translate(0,0) rotate(0deg); }
-            to { transform: translate(50px, 100px) rotate(20deg); }
+            to { transform: translate(60px, 120px) rotate(15deg); }
         }
 
-        /* Header & Inspiration Section */
+        /* Hero Section */
         header {
-            padding: 80px 5% 40px;
+            padding: 100px 5% 60px;
             text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .lightbulb-icon {
-            font-size: 3rem;
-            color: var(--idea-gold);
-            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
-            margin-bottom: 20px;
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+
+        .profile-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 4px solid var(--idea-gold);
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+
+        .spark-icon {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--idea-gold);
+            color: var(--primary);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
-        }
+        h1 { font-size: 3.5rem; margin: 10px 0; font-weight: 800; letter-spacing: -2px; }
+        .tagline { color: var(--text-dim); font-size: 1.25rem; margin-bottom: 30px; }
 
-        h1 { font-size: 3rem; margin: 0; letter-spacing: -1px; }
-        p.tagline { color: #94a3b8; font-size: 1.2rem; max-width: 600px; margin: 10px auto; }
-
-        /* Filter Tabs */
-        .filter-container {
+        /* Contact Bar */
+        .contact-bar {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .filter-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 500;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--idea-gold);
-            color: var(--primary);
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
-        }
-
-        /* The Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 0 5% 100px;
-        }
-
-        /* Idea Card Design */
-        .card {
+        .contact-link {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
             background: var(--glass);
             border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 30px;
-            position: relative;
-            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .contact-link:hover {
+            border-color: var(--idea-gold);
+            background: rgba(251, 191, 36, 0.1);
+        }
+
+        /* Portfolio Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 30px;
+            padding: 0 8% 100px;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 28px;
+            padding: 35px;
+            backdrop-filter: blur(12px);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
             border-color: var(--idea-gold);
-            background: rgba(255,255,255,0.06);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .status-pill {
-            display: inline-block;
+            align-self: flex-start;
             background: rgba(45, 212, 191, 0.1);
             color: var(--accent-teal);
-            padding: 4px 12px;
+            padding: 5px 14px;
             border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            border: 1px solid rgba(45, 212, 191, 0.3);
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            margin-bottom: 20px;
         }
 
-        .card h3 { font-size: 1.5rem; margin: 10px 0; color: #fff; }
-        .card p { color: #94a3b8; line-height: 1.6; font-size: 0.95rem; }
+        .card h3 { font-size: 1.6rem; margin-bottom: 12px; color: #fff; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
 
-        /* Progress Steps */
-        .steps {
+        /* Steps Visualization */
+        .roadmap {
             display: flex;
             justify-content: space-between;
-            margin-top: 25px;
+            margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .step {
-            text-align: center;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: #475569;
+            text-transform: uppercase;
+            font-weight: 700;
         }
 
-        .step.active { color: var(--idea-gold); font-weight: bold; }
+        .step.active { color: var(--idea-gold); }
 
-        .ignite-btn {
-            margin-top: 20px;
-            width: 100%;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            background: transparent;
+        .btn-boost {
+            margin-top: 25px;
+            padding: 14px;
+            border-radius: 14px;
             border: 1px solid var(--idea-gold);
+            background: transparent;
             color: var(--idea-gold);
+            font-weight: 700;
             cursor: pointer;
-            font-weight: 600;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .ignite-btn:hover {
+        .btn-boost:hover {
             background: var(--idea-gold);
             color: var(--primary);
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(251, 191, 36, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 191, 36, 0); }
+        }
+
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .grid { grid-template-columns: 1fr; }
+            h1 { font-size: 2.5rem; }
+            .grid { grid-template-columns: 1fr; padding: 0 5% 50px; }
         }
     </style>
 </head>
@@ -176,77 +210,87 @@
     <div class="shape shape-2"></div>
 
     <header>
-        <div class="lightbulb-icon"><i class="fas fa-lightbulb"></i></div>
-        <h1>My Idea Listing</h1>
-        <p class="tagline">Igniting ventures, fueling curiosity, and building the infrastructure for tomorrow's breakthroughs.</p>
+        <div class="profile-container">
+            <img src="https://media.licdn.com/dms/image/v2/C5603AQHC-RrPNE0LSA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1613405413687?e=1780531200&v=beta&t=J3VS9oo_H7xOxjOSlBp-xfY8A7enIJtncX_vhITkqzY" alt="SiD Oluwagbeyi" class="profile-img">
+            <div class="spark-icon"><i class="fas fa-bolt"></i></div>
+        </div>
+        <h1>SiD Oluwagbeyi</h1>
+        <p class="tagline">Technology Executive & Software Architect. Building frameworks that turn creative sparks into scalable ventures.</p>
+        
+        <div class="contact-bar">
+            <a href="https://www.linkedin.com/in/oluwagbeyid/" class="contact-link" target="_blank">
+                <i class="fab fa-linkedin"></i> linkedin.com/in/oluwagbeyid
+            </a>
+            <a href="mailto:sanyaoluwagbeyi@gmail.com" class="contact-link">
+                <i class="fas fa-envelope"></i> sanyaoluwagbeyi@gmail.com
+            </a>
+            <a href="mailto:sanya@joinfoundry.run" class="contact-link">
+                <i class="fas fa-rocket"></i> sanya@joinfoundry.run
+            </a>
+        </div>
     </header>
-
-    <div class="filter-container">
-        <button class="filter-btn active">All Projects</button>
-        <button class="filter-btn">Venture Ideas</button>
-        <button class="filter-btn">Research Labs</button>
-    </div>
 
     <div class="grid">
         <div class="card">
             <div class="status-pill">Prototype Ready</div>
             <h3>Toe Gap Applicator</h3>
-            <p>A precision beauty-tech instrument designed to solve ergonomics in specialized applications. Bridging the gap between conceptual design and physical utility.</p>
-            <div class="steps">
-                <div class="step active">Sketch</div>
-                <div class="step active">3D Model</div>
-                <div class="step active">Prototype</div>
-                <div class="step">Market</div>
+            <p>A precision beauty-tech solution focused on ergonomics and specialized utility. Moving from conceptual 3D modeling to physical functional testing.</p>
+            <div class="roadmap">
+                <span class="step active">Sketch</span>
+                <span class="step active">Design</span>
+                <span class="step active">Prototype</span>
+                <span class="step">Market</span>
             </div>
-            <button class="ignite-btn">View Schematics</button>
+            <button class="btn-boost">Boost Concept</button>
         </div>
 
         <div class="card">
             <div class="status-pill">Research Ready</div>
             <h3>LifeMetric</h3>
-            <p>Revolutionizing elderly care using mmWave radar and Edge AI. Real-time fall detection without cameras or wearables, prioritizing dignity and safety.</p>
-            <div class="steps">
-                <div class="step active">Ethos</div>
-                <div class="step active">Radar AI</div>
-                <div class="step">Beta</div>
-                <div class="step">Launch</div>
+            <p>Privacy-first elderly care using mmWave radar and Edge AI. Real-time health monitoring without cameras or wearables, preserving dignity for a global aging population.</p>
+            <div class="roadmap">
+                <span class="step active">Vision</span>
+                <span class="step active">R&D</span>
+                <span class="step">Alpha</span>
+                <span class="step">Pilot</span>
             </div>
-            <button class="ignite-btn">Explore Tech Stack</button>
+            <button class="btn-boost">Boost Concept</button>
         </div>
 
         <div class="card">
-            <div class="status-pill" style="color: var(--idea-gold); border-color: var(--idea-gold);">Sample App In-Progress</div>
+            <div class="status-pill" style="border-color: var(--idea-gold); color: var(--idea-gold);">Sample App In-Progress</div>
             <h3>JoinFoundry</h3>
-            <p>From Idea to Boardroom in 7 days. A comprehensive framework for rapid venture building and rapid prototyping of business concepts.</p>
-            <div class="steps">
-                <div class="step active">Logic</div>
-                <div class="step active">UI/UX</div>
-                <div class="step">Full Code</div>
-                <div class="step">Scale</div>
+            <p>Idea → Boardroom in 7 Days. A systematic approach to rapid venture building, providing the tools for founders to manifest concepts instantly.</p>
+            <div class="roadmap">
+                <span class="step active">Core</span>
+                <span class="step active">Sample</span>
+                <span class="step">Full Build</span>
+                <span class="step">Launch</span>
             </div>
-            <button class="ignite-btn">Join the Foundry</button>
+            <button class="btn-boost">Boost Concept</button>
         </div>
 
         <div class="card">
             <div class="status-pill">Research Ongoing</div>
             <h3>Fintech Capital Framework</h3>
-            <p>A prescriptive framework of investment-ready strategies for Nigerian Fintech entrepreneurs seeking future capital and sustainable growth.</p>
-            <div class="steps">
-                <div class="step active">Data</div>
-                <div class="step active">Analysis</div>
-                <div class="step">Publication</div>
-                <div class="step">Impact</div>
+            <p>Strategic, investment-ready recommendations for Fintech entrepreneurs in Nigeria. Identifying future capital trends and sustainable scaling strategies.</p>
+            <div class="roadmap">
+                <span class="step active">Survey</span>
+                <span class="step active">Analytic</span>
+                <span class="step">Paper</span>
+                <span class="step">Advise</span>
             </div>
-            <button class="ignite-btn">Read Framework</button>
+            <button class="btn-boost">Boost Concept</button>
         </div>
     </div>
 
     <script>
-        // Simple interactivity for the buttons
-        document.querySelectorAll('.ignite-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const title = btn.parentElement.querySelector('h3').innerText;
-                alert(`Igniting the spark for: ${title}. Redirecting to project details...`);
+        document.querySelectorAll('.btn-boost').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const project = e.target.parentElement.querySelector('h3').innerText;
+                console.log(`Sparking boost for ${project}`);
+                e.target.innerText = "Ignited!";
+                setTimeout(() => e.target.innerText = "Boost Concept", 2000);
             });
         });
     </script>
