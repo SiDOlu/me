@@ -150,50 +150,73 @@
 </div>
 
 <script>
-    async function validateAndLog() {
-    const name = document.getElementById('visitor-name').value;
-    const email = document.getElementById('visitor-email').value;
-    const btn = document.getElementById('agree-btn');
-
-    // Basic Validation
-    if (!name || !email || !email.includes('@')) {
-        alert("Please provide a valid name and email to proceed.");
-        return;
-    }
-
-    btn.innerText = "Verifying Identity...";
-    btn.disabled = true;
-
-    try {
-        // 1. Fetch IP
-        const ipResponse = await fetch('https://api.ipify.org?format=json');
-        const ipData = await ipResponse.json();
-        
-        // 2. Send to Formspree
-        await fetch('https://formspree.io/f/xqenjgvq', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "Subject": "New Authorized NDA Access",
-                "Visitor Name": name,
-                "Visitor Email": email,
-                "Visitor IP": ipData.ip,
-                "Timestamp": new Date().toLocaleString(),
-                "Agreement": "Full Legal Acceptance of Proprietary Terms"
-            })
+        // 1. On Load: Check if user already accepted
+        window.addEventListener('DOMContentLoaded', () => {
+            const hasAccepted = localStorage.getItem('nda_accepted');
+            const overlay = document.getElementById('nda-overlay');
+            
+            if (hasAccepted === 'true') {
+                overlay.classList.add('hidden');
+                console.log("Access granted via existing session.");
+            } else {
+                overlay.classList.remove('hidden');
+                console.log("NDA signature required.");
+            }
         });
 
-        // 3. Grant Access
-        localStorage.setItem('nda_accepted', 'true');
-        localStorage.setItem('visitor_name', name); // Optional: store name to personalize the header later
-        document.getElementById('nda-overlay').classList.add('hidden');
-    } catch (e) {
-        console.error("Logging sync failed");
-        // Fallback: allow entry if the logging service is down to avoid blocking legitimate users
-        document.getElementById('nda-overlay').classList.add('hidden');
-    }
-}
-</script>
+        async function validateAndLog() {
+            const nameInput = document.getElementById('visitor-name');
+            const emailInput = document.getElementById('visitor-email');
+            const msgBox = document.getElementById('message-box');
+            const btn = document.getElementById('agree-btn');
+            const overlay = document.getElementById('nda-overlay');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            // Custom validation UI instead of alert()
+            if (!name || !email || !email.includes('@')) {
+                msgBox.innerText = "Please provide a valid name and email to proceed.";
+                msgBox.classList.remove('hidden');
+                return;
+            }
+
+            msgBox.classList.add('hidden');
+            btn.innerText = "Verifying Identity...";
+            btn.disabled = true;
+
+            try {
+                // 1. Fetch IP
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                
+                // 2. Send to Formspree
+                await fetch('https://formspree.io/f/xqenjgvq', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        "Subject": "New Authorized NDA Access",
+                        "Visitor Name": name,
+                        "Visitor Email": email,
+                        "Visitor IP": ipData.ip,
+                        "Timestamp": new Date().toLocaleString(),
+                        "Agreement": "Full Legal Acceptance of Proprietary Terms"
+                    })
+                });
+
+                // 3. Grant Access & Store in LocalStorage
+                localStorage.setItem('nda_accepted', 'true');
+                localStorage.setItem('visitor_name', name); 
+                overlay.classList.add('hidden');
+
+            } catch (e) {
+                console.error("Logging sync failed", e);
+                // Fallback: allow entry if the logging service is down to avoid blocking users
+                localStorage.setItem('nda_accepted', 'true');
+                overlay.classList.add('hidden');
+            }
+        }
+    </script>
 
 </body>
 </html>
